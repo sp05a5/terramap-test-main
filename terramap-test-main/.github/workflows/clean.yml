@@ -1,0 +1,38 @@
+name: Cleanup Artifacts
+on:
+  push:
+    branches:
+        - main
+#   workflow_run:
+#     workflows: ["YourWorkflowName"]  # Specify the workflow name you want to clean up after
+#     types:
+#       - completed
+
+jobs:
+  cleanup:
+    runs-on: [self-hosted, linux, X64, terramap]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Use GITHUB_WORKSPACE
+        run: |
+          # You can use ${GITHUB_WORKSPACE} to reference files or directories in your repository.
+          echo "GitHub Workspace: ${GITHUB_WORKSPACE}"
+          ls ${GITHUB_WORKSPACE}  # List files and directories in the workspace.
+      - name: Delete old artifacts
+        run: |
+    
+         # Specify the path where your artifacts are stored relative to the workspace
+          artifact_path="https://github.com/TerraClear/terramap-test/pkgs/npm/terramap-test"
+          
+          # Specify the pattern of files you want to delete (e.g., all .zip files)
+          file_pattern="*.1"
+          
+          # Specify the number of days to keep artifacts (e.g., delete files older than 1 days)
+          retention_days=1
+          
+          # Find and delete artifacts older than the retention period
+          find "${artifact_path}" -name "${file_pattern}" -type f -mtime +${retention_days} -exec rm -f {} \;
+# env:
+#   retention_days: ${{ secrets.ARTIFACT_RETENTION_DAYS }}

@@ -1,0 +1,20 @@
+{
+  "name": "@terraclear/terramap-test",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:TerraClear/terramap-test.git",
+        "directory": "packages/terramap-test"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/"
+    },  
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
