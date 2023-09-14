@@ -16,9 +16,9 @@ jobs:
               with:
                 node-version: '18'    
     
-            - name: 'Scan Github Key for Updates'
-              run: |
-                ssh-keyscan github.com > /root/.ssh/known_hosts
+            # - name: 'Scan Github Key for Updates'
+            #   run: |
+            #     ssh-keyscan github.com > /root/.ssh/known_hosts
     
             - name: 'Prune Docker'
               run: docker system prune
