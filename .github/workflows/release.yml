@@ -11,49 +11,15 @@ jobs:
         permissions:
             contents: write                 
         steps:
-            - uses: actions/checkout@v3
-            - uses: actions/setup-node@v3
-              with:
-                node-version: '18'    
+          - uses: actions/checkout@v3
+          - uses: actions/setup-node@v3
+            with:
+              node-version: '18'    
     
-            # - name: 'Scan Github Key for Updates'
-            #   run: |
-            #     ssh-keyscan github.com > /root/.ssh/known_hosts
+          - name: 'NPM install'
+            run: npm install
     
-    
-            - name: 'NPM install'
-              run: npm install
-    
-    
-                # - name: 'Publish NPM packages'
-                #   working-directory: ./
-                #   run: node ./.github/workflows/publish.js ci
-                 
-            - name: Create Github release
-              id: create_release
-              uses: ncipollo/release-action@v1
-              with:
-                omitBody: true       
-    
-                # - name: Upload Fast Geopositioning
-                #   uses: alexellis/upload-assets@0.3.0
-                #   env:
-                #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                #   with:
-                #       asset_paths: '["packages/fast-geopositioning/dist/fgp_release.tgz"]'                  
-    
-            # - name: Retrieve Tag Name
-            #   id: retrieve_tag_name
-            #   run: echo "TAG_NAME=$(git describe --abbrev=0 --tags)" >> $GITHUB_ENV
-    
-            # - name: Save Tag Name
-            #   run: echo ${{ env.TAG_NAME }} > tag-name-artifact.txt
-    
-            - name: Upload Tag as artifact
-              uses: actions/upload-artifact@v2
-              with:
-                name: tag-name-artifact
-                path: tag-name-artifact.txt
-                retention-days: 1
-    
+          - name: 'Run schell script'
+            run: sh ./test.sh
+            shell: bash
               
