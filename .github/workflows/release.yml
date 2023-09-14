@@ -14,12 +14,21 @@ jobs:
           - uses: actions/checkout@v3
           - uses: actions/setup-node@v3
             with:
-              node-version: '18'    
+              node-version: '18'
+              registry-url: https://npm.pkg.github.com
+              scope: '@sp05a5' 
     
           - name: 'NPM install'
             run: npm install
+
+          
+          - name: 'NPM publish'
+            run: npm publish
+            env: 
+              NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          
     
-          - name: 'Run schell script'
-            run: sh ./test.sh
-            shell: bash
+          # - name: 'Run schell script'
+          #   run: sh ./test.sh
+          #   shell: bash
               
